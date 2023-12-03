@@ -6,9 +6,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/new', methods=["GET", "POST"])
-def new():
-    return render_template('new.html')
+@app.route('/predict', methods=["GET", "POST"])
+def predict():
+    if request.method == 'GET':
+        return render_template('predict.html')
+    elif request.method == 'POST':
+        text = request.form["text"]
+        print(text)
+        return render_template('predict.html')
 
 @app.route('/show', methods=["GET", "POST"])
 def show():
