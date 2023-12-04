@@ -1,12 +1,18 @@
-import pandas as pd
 from pathlib import Path
+import pandas as pd
 
-p = Path('./static/csv')
-file_name = '*.csv'
+def predict_player(text):
+    p = Path('./static/csv')
+    file_name = '*.csv'
+    result_dataframes = []
 
-csv_files  = p.glob(file_name)
 
-for file in csv_files:
-    """ CSVファイルデータをData Frameに変換 """
-    df1 = pd.read_csv(file)
-    print(df1)
+    csv_files = p.glob(file_name)
+    for file in csv_files:
+        df = pd.read_csv(file)
+        # 選手名が1文字でない場合のみ部分一致でフィルタリング
+        filtered_df = df[df['選手名'].str.contains(text)]
+        result_dataframes.append(filtered_df)
+        final_result = result_dataframes
+
+    return final_result
