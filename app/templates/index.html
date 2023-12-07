@@ -1,9 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>検索したい選手名を入力してください！</h1>
+    <h1>パ・リーグプロ野球選手検索</h1>
+    <h3>検索したいパ・リーグの選手名を入力してください！</h3>
     <form action="/predict" method="POST">
         <input type="text" name="text">
+        <p><br>
+            <input type="checkbox" name="q1" value="野手"> 野手
+            <input type="checkbox" name="q1" value="投手"> 投手
+        </p>
         <input type="submit" value="検索する">
     </form>
+    <br>
 {% endblock %}
-

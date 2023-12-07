@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="ja">
 <body>
-    <a href="/">indexへ移動</a>
-    <a href="/show">showへ移動</a>
-    {{result1}}
+    {% if msg %}
+        <p>{{msg}}</p>
+        <a href="/">検索へ戻る</a>
+    {% endif %}
+    {% if result1 %}
+        {% for i in result1.split('\n') %}
+            <p>{{i}}</p>
+        {% endfor %}
+    {% endif %}
     <br>
-    {{result2}}
+    {% if result2 %}
+        {% for i in result2.split('\n') %}
+            <p>{{i}}</p>
+        {% endfor %}
+    {% endif %}
+    <a href="/">検索へ戻る</a>
 </body>

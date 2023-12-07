@@ -16,10 +16,23 @@ def predict():
     if request.method == 'GET':
         return render_template('predict.html')
     elif request.method == 'POST':
-        text = request.form["text"]
-        print(text)
-        result1 = predict_player1(text)
-        result2 = predict_player2(text)
+        text = request.form.getlist("text")
+        positions = request.form.getlist("q1")
+        print(text,positions)
+        result1 = None  # デフォルトの値でresult1を初期化
+        result2 = None  # デフォルトの値でresult2を初期化
+        
+        if not text or not text[0].strip():  # textが空または空白文字だけの場合
+            msg = '検索テキストが入力されていません'
+            return render_template('predict.html', msg=msg)
+
+        if '野手' in positions:
+            result1 = predict_player1(text[0])
+        if '投手' in positions:
+            result2 = predict_player2(text[0])
+        if '野手' not in positions and '投手' not in positions:
+            msg = 'ポジションが選択されていません'
+            return render_template('predict.html',msg = msg)
         return render_template('predict.html',result1 = result1, result2 = result2)
 
 if __name__ == "__main__":
