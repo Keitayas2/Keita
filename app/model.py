@@ -63,11 +63,12 @@ def get_player_name(text):
     for file in csv_files:
         df = pd.read_csv(file)
         filtered_df = df[df['選手名'].str.contains(text)]
-        print(filtered_df)
         if not filtered_df.empty:
-            result_dataframes.append(filtered_df)
+            # 選手名の列を抽出
+            player_name = filtered_df['選手名'].iloc[0]
+            print(player_name)
+            return player_name
 
-    return result_dataframes
 
 def get_player_image(player_name):
     # ファイル名を構築

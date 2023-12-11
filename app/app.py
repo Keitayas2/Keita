@@ -29,17 +29,14 @@ def predict():
 
         if '野手' in positions:
             result1 = predict_player1(text[0])
-            player_name = get_player_name(text[0])
-            print(player_name)
-            img = get_player_image(player_name)
+            get_player_name(text[0])
         if '投手' in positions:
             result2 = predict_player2(text[0])
-            player_name = get_player_name(text[0])
-            img = get_player_image(player_name)
+            get_player_name(text[0])
         if '野手' not in positions and '投手' not in positions:
             msg = 'ポジションが選択されていません'
             return render_template('predict.html',msg = msg)
-        return render_template('predict.html',result1 = result1, result2 = result2, img = img)
+        return render_template('predict.html',result1 = result1, result2 = result2)
 
 if __name__ == "__main__":
     app.run(debug = True)
