@@ -8,12 +8,14 @@
     {% if result1 %}
         {% for i in result1.split('\n') %}
             <p>{{i}}</p>
+            <img src="./image/{{img}}" alt="{{img}}選手" width="100" height="100" > 
         {% endfor %}
     {% endif %}
     <br>
     {% if result2 %}
         {% for i in result2.split('\n') %}
             <p>{{i}}</p>
+            <img src="./image/{{img}}" alt="{{img}}選手" width="100" height="100" > 
         {% endfor %}
     {% endif %}
     <a href="/">検索へ戻る</a>

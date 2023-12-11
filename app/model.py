@@ -1,9 +1,8 @@
 from pathlib import Path
 import pandas as pd
 import csv
-
-from pathlib import Path
-import pandas as pd
+import os
+from io import StringIO
 
 def predict_player1(text):
     p = Path('./static/csv')
@@ -24,13 +23,11 @@ def predict_player1(text):
 
         if not final_result.empty:
             final_result = final_result.to_string(index=False, header=False)  # indexとheaderを除外して文字列に変換
-            print(final_result)
             return final_result
         else:
             return None
     else:
         return None
-
 
 def predict_player2(text):
     p = Path('./static/csv')
@@ -51,9 +48,33 @@ def predict_player2(text):
 
         if not final_result.empty:
             final_result = final_result.to_string(index=False, header=False)  # indexとheaderを除外して文字列に変換
-            print(final_result)
             return final_result
         else:
             return None
+    else:
+        return None
+
+def get_player_name(text):
+    p = Path('./static/csv')
+    file_name = '*.csv'
+    result_dataframes = []
+
+    csv_files = p.glob(file_name)
+    for file in csv_files:
+        df = pd.read_csv(file)
+        filtered_df = df[df['選手名'].str.contains(text)]
+        print(filtered_df)
+        if not filtered_df.empty:
+            result_dataframes.append(filtered_df)
+
+    return result_dataframes
+
+def get_player_image(player_name):
+    # ファイル名を構築
+    image_filename = f'./static/images/{player_name}.jpg'
+
+    # ファイルの存在を確認
+    if os.path.exists(image_filename):
+        return image_filename
     else:
         return None
